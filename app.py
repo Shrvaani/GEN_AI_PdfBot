@@ -304,11 +304,11 @@ if uploaded_files:
         docs = []
         splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
         for uploaded in uploaded_files:
-        with NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
+            with NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
                 tmp.write(uploaded.read())
-            tmp_path = tmp.name
-        loader = PyMuPDFLoader(tmp_path)
-        pages = loader.load()
+                tmp_path = tmp.name
+            loader = PyMuPDFLoader(tmp_path)
+            pages = loader.load()
             docs.extend(splitter.split_documents(pages))
 
         hf_token = os.getenv("HF_TOKEN")
